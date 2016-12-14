@@ -1,0 +1,7 @@
+{% macro assets_header() %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename = 'css/custom.css') }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="{{ url_for('static', filename = 'js/custom.js') }}"></script>
+{% endmacro %}
