@@ -1,10 +1,12 @@
 {% macro nav(site) %}
 	<nav class="ui top fixed menu">
-	<a href="{{ site['url'] }}" class="item"><i class="student icon"></i>site['name']</a>
-	<div class="right menu">
-		{% for item in site['menu'] %}
-		<a class="item" href="{{ item['url'] }}">{{ item['text'] }}</a>
-		{% endfor %}
+	<div class="ui container">
+		<a href="{{ site['url'] }}" class="item"><i class="student icon"></i>{{ site['name'] }}</a>
+		<div class="right menu">
+			{% for item in site['menu'] %}
+			<a class="item" href="{{ item['url'] }}">{{ item['text'] }}</a>
+			{% endfor %}
+		</div>
 	</div>
 </nav>
 {% endmacro %}

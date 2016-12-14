@@ -2,7 +2,8 @@ from flask import Flask, render_template, url_for
 config = {
 	'port': 8000,
 	'url_admin' : '/admin',
-	'url' : '127.0.0.1',
+	'url' : 'http://127.0.0.1:'+ str(8000),
+	'ip' : '127.0.0.1',
 	'admin': 'root',
 	'password' : 'hola',
 	'menu_active' : True,
@@ -13,29 +14,28 @@ site = {
 	'url' : config['url'],
 	'brand' : 'Otro sitio mas con Flask',
 	'menu': [
-	{'text': 'Home','url': config['url']},
-	{'text': '¡Empieza aqui!','url': config['url']},
-	{'text': 'Cursos','url':config['url'] + '/cursos'},
-	{'text': 'Talleres','url':config['url'] + '/talleres'},
-	{'text': 'Area de Socios','url':config['url'] + '/area-de-socios'},
+		{'text': '¡Empieza aqui!','url': config['url']},
+		{'text': 'Cursos','url': config['url'] + '/cursos'},
+		{'text': 'Talleres','url':config['url'] + '/talleres'},
+		{'text': 'Area de Socios','url' : config['url'] + '/area-de-socios'},
 	]
 }
 articles = [
 	{
-	'title': 'mi tercer articulo :D',
-	'url' : 'mi-tercer-articulo',
+	'title': 'Cursos',
+	'url' : 'cursos',
 	'content': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus fuga, modi saepe qui! Natus odio sed magnam aliquid inventore quisquam cupiditate, dolorem sunt id quo harum temporibus ducimus illo tempora!',
 	'categories': ['mi tercer articulo', 'con texto de relleno']
 	},
 	{
-	'title': 'mi tercer articulo :D',
-	'url' : 'mi-tercer-articulo',
+	'title': 'Talleres',
+	'url' : 'talleres',
 	'content': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus fuga, modi saepe qui! Natus odio sed magnam aliquid inventore quisquam cupiditate, dolorem sunt id quo harum temporibus ducimus illo tempora!',
 	'categories': ['mi tercer articulo', 'con texto de relleno']
 	},
 	{
-	'title': 'mi tercer articulo :D',
-	'url' : 'mi-tercer-articulo',
+	'title': 'Area de Socio',
+	'url' : 'area-de-socios',
 	'content': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus fuga, modi saepe qui! Natus odio sed magnam aliquid inventore quisquam cupiditate, dolorem sunt id quo harum temporibus ducimus illo tempora!',
 	'categories': ['mi tercer articulo', 'con texto de relleno']
 	},
@@ -136,11 +136,12 @@ def index():
 
 @app.route('/<name>')
 def blog(name = 'none'):
-	for article in articles:
-		if article['url'] == name:
-			return render_template('blog.html', article = article, site = site, config = config)
+	if config['blog_active'] == True:
+		for article in articles:
+			if article['url'] == name:
+				return render_template('blog.html', article = article, site = site, config = config)
 	return render_template('page_not_found.html')
 
 
 if __name__ == '__main__':
-	app.run(debug = True, port = config['port'], host = config['url'])
+	app.run(debug = True, port = config['port'], host = config['ip'])

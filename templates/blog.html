@@ -1,5 +1,6 @@
 {% extends 'base/template_base.html' %}
 {% from 'macros/nav.html' import nav %}
+{% from 'macros/assets_header.html' import assets_header %}
 {% from 'macros/header.html' import header %}
 {% from 'macros/footer.html' import footer %}
 
@@ -8,7 +9,7 @@
 {% endblock %}
 
 {% block assets_header %}
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+{{ assets_header() }}
 {% endblock %}
 
 
@@ -33,9 +34,9 @@
 
 
 {% block content %}
-<div class="container">
-	<div class="row">
-		<div class="col-xs-8 col-xs-offset-2">
+<div class="ui container">
+	<div class="grid">
+		<div class="column">
 			<h3><a href="{{ article['url'] }}">{{article['title']}}</a></h3>
 			<p>{{ article['content'] }}</p>
 		</div>
@@ -48,6 +49,4 @@
 {% endblock %}
 
 {% block assets_footer %}
-<link rel="stylesheet" href="{{ url_for('static', filename = 'css/custom.css') }}">
-<script src="{{ url_for('static', filename = 'js/custom.js') }}"></script>
 {% endblock %}
